@@ -6,5 +6,5 @@ function DecimalABinario(num) {}
 
 module.exports = {
    BinarioADecimal,
-   DecimalABinario,
+   DecimalABinario,sa
 };
