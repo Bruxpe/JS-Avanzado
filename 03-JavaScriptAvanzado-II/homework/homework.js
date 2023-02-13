@@ -12,7 +12,7 @@ nuevoContador()     // 2
 
 const otroContador = counter()
 otroContador()      // 1
-otroContador()      // 2 */
+otroContador()      // 2 *s/
 function counter() {}
 
 /* Ejercicio 2
