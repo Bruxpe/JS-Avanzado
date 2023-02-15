@@ -11,7 +11,7 @@ nuevoContador()     // 1
 nuevoContador()     // 2
 
 const otroContador = counter()
-otroContador()      // 1
+otroContador()      // 1asdsa
 otroContador()      // 2 */
 function counter() {
   var contador = 1;
