@@ -1,6 +1,7 @@
 'use strict';
 
-// Closures
+
+//CLOSURES
 
 /* Ejercicio 1
 La función counter debe retornar otra función. Esta función retornada debe actuar como un contador, retornando 
@@ -11,21 +12,22 @@ nuevoContador()     // 1
 nuevoContador()     // 2
 
 const otroContador = counter()
-otroContador()      // 1asdsa
+otroContador()      // 1
 otroContador()      // 2 */
 function counter() {
-  var contador = 1;
+var i= 0;
   return function(){
-    console.log(contador);
-    return contador++;
+      i++;
+      return i;
   }
-}
-var a = counter();
-console.log(counter());
-console.log(a());
-console.log(a());
-console.log(a());
-console.log(a());
+} 
+var hola = counter();
+
+hola();
+hola();
+hola();
+
+// como el de dai e isac
 
 
 /* Ejercicio 2
@@ -50,30 +52,20 @@ otra vez cálculos que ya se hicieron anteriormente.
   squareCache(5)    // no volverá a invocar a square, simplemente buscará en la caché cuál es el resultado de square(5) y lo retornará
    (tip: si usaste un objeto, podés usar hasOwnProperty) */
 
-function cacheFunction(cb) {
-
-  const cache = {};
-  return function(arg) {
-    if (cache.hasOwnProperty(arg)) {
-      return cache[arg];
-    } else {
-      const result = cb(arg);
-      cache[arg] = result;
-      return result;
-    }
+   // medio complejo
+function cacheFunction(cb) {// es una funcion cualquier que haga cualquier cosa
+  var cache = {};
+                //
+ return function(arg){//? cache.hasOwnProperty(arg) 
+  if(cache.hasOwnProperty(arg)){
+    return cache[arg];
+  }else{
+    cache[arg]= cb(arg);
+    return cache[arg];
   }
+ };
 }
-const myObj = {
-  prop1: "value1",
-  prop2: "value2"
-};
-if (myObj.hasOwnProperty("prop1")) {
-  console.log("myObj tiene una propiedad llamada prop1");
-} else {
-  console.log("myObj no tiene una propiedad llamada prop1");
-}
-console.log(myObj.hasOwnProperty("prop1"))
-console.log(myObj["prop1"])
+
 //----------------------------------------
 
 // Bind
@@ -94,24 +86,34 @@ function getNombre() {
 /*
   Ejercicio 3
   IMPORTANTE: no modificar el código de arriba (variables instructor y alumno, y función getNombre)
-  Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
+  Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre 
+  pero retornen el nombre del instructor y del alumno, respectivamente.
 */
 
-let getNombreInstructor = getNombre.bind();
-let getNombreAlumno = getNombre.bind();
+let getNombreInstructor = getNombre.bind(instructor); // call, podemos usar los 3
+let getNombreAlumno = getNombre.bind(alumno);
 
 /*
   Ejercicio 4
-  Sin modificar la función crearCadena, usar bind para guardar, en las tres variables declaradas a continuación, tres funciones que retornen una cadena (string) y el delimitador especificado (asteriscos, guiones, y guiones bajos, respectivamente). Las funciones obtenidas deberían recibir solamente un argumento - la cadena de texto - ya que los otros argumentos habrán sido "bindeados". 
+  Sin modificar la función crearCadena, usar bind para guardar, en las tres variables declaradas a continuación, 
+  tres funciones que retornen una cadena (string) y el delimitador especificado (asteriscos, guiones, y guiones bajos, 
+    respectivamente). Las funciones obtenidas deberían recibir solamente un argumento - la cadena de texto - ya que los otros argumentos habrán sido "bindeados". 
 */
 
+//----------------------------------------------------------------------------------------- */
 function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
     return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
+//  * un texto cualquier ( cadena) *
+let textoAsteriscos = crearCadena.bind(null,"*","*");
+let textoGuiones = crearCadena.bind(null,"-","-");
+let textoUnderscore = crearCadena.bind(null,"_","_");
 
-let textoAsteriscos = crearCadena.bind();
-let textoGuiones = crearCadena.bind();
-let textoUnderscore = crearCadena.bind();
+textoAsteriscos();
+textoGuiones();
+textoUnderscore();
+
+console.log(crearCadena("Franco"))
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
@@ -125,3 +127,99 @@ module.exports = {
    textoGuiones,
    textoUnderscore,
 };
+
+//                                                      ---------MI PRACTICA-----------
+
+// Closures -----------  una fucion que retorna otra funcion
+
+// function saludar(saludo){// "hola" 
+//   return function (nombre){
+//     console.log(saludo+ " " +nombre);
+//   }
+// }
+//  var saludarhola = saludar("hola");
+//                     //  function (nombre){ -------> aca recibe Dai
+//                     //   console.log(saludo+ " " +nombre);
+//                     // }
+// saludarhola("Dai") ;// me sali :v
+// saludarhola("Bruno")
+
+
+// //quiero que salga bruno come arroz aver
+
+// function brunox (bruno){
+//   return function(comida){
+//     console.log( bruno+ " come " + comida)
+//   }
+// }
+// var fucionbruno = brunox("alex");
+// fucionbruno("arroz");
+// fucionbruno("Platano");
+// fucionbruno("manzana");
+// ;
+
+// // ahora dai hermosa :v
+//  function decirle (nombre3){
+//   return function(quees){
+//     return (nombre3 + ' ' +quees);
+//   }
+//  }
+//  var brunodice = decirle('dai');
+//  console.log(brunodice('hermosa'))
+
+
+// var crearfuncion = function(){
+//     var nuevoarray = []// [fn, fn, fn]
+//     // mi array vacio
+//     for (let i= 0; i < 3; i++) {
+//         // i= 0
+//       nuevoarray.push(
+//               function() {
+//                   console.log(i)
+//                   }
+//         )
+//     }
+//     return nuevoarray; //[ fn , fn , fn]
+//   }
+// var arr = crearfuncion(); // [fn, fn , fn]
+//  arr[0]() 
+//  arr[1]() 
+//  arr[2]() 
+
+//  console.log(arr[0])
+
+//                                      BIND
+// var alumno = {
+//   name : 'Bruno',
+//   last: 'Gonza',
+// }
+
+// var logueaName = function(){
+//   console.log(this);
+// }
+
+// var logNanmeAlumno = logueaName.bind(alumno);  // me devuelve una funcion
+
+// logNanmeAlumno();
+
+//                                      CALL                 -----------> a donde mira
+// var alumno = {
+//   name : 'Bruno',
+//   last: 'Gonza',
+// }
+
+// var logueaName = function(){
+//   console.log(this.name);
+// }
+
+// logueaName.call(alumno);// solo a donde quiero que mire el this, 
+
+// let lognombre = function(arg1, arg2){
+//     console.log( arg1 + ' '+ this.name + arg2);
+//   }
+//   lognombre.call(alumno, 'Hola',  ' como estas');  
+
+//                                  APLLY
+
+//        lognombre.apply(alumno, ['Hola',  ' como estas']);  SOLO QUE ESTAS EN LLAVES
+
