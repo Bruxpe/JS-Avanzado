@@ -1,5 +1,7 @@
 'use strict';
 
+const { cache } = require("@11ty/eleventy/src/TemplateCache");
+
 
 //CLOSURES
 
@@ -54,17 +56,26 @@ otra vez cálculos que ya se hicieron anteriormente.
 
    // medio complejo
 function cacheFunction(cb) {// es una funcion cualquier que haga cualquier cosa
-  var cache = {};
-                //
- return function(arg){//? cache.hasOwnProperty(arg) 
-  if(cache.hasOwnProperty(arg)){
-    return cache[arg];
-  }else{
-    cache[arg]= cb(arg);
-    return cache[arg];
+  var cache= {};
+  return function(arg){
+    if(cache.hasOwnProperty(arg)) return cache[arg];
+    else{
+      return cache[arg]= cb(arg)
+    }
   }
- };
 }
+
+//   var cache = {};
+//                 //
+//  return function(arg){//? cache.hasOwnProperty(arg) 
+//   if(cache.hasOwnProperty(arg)){
+//     return cache[arg];
+//   }else{
+//     cache[arg]= cb(arg);
+//     return cache[arg];
+//   }
+//  };
+// }
 
 //----------------------------------------
 
