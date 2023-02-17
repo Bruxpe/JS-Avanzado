@@ -11,22 +11,23 @@ segundo elementos de la misma, y sabiendo que cualquier elemento que se agregue 
 Ejemplo: nFibonacci(7) retornará 13, ya que 13 es el dígito que está en la posición 7 de la secuencia.
 
 Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... 
-
+            0 1   2  3   4  5 6   7             
 
 Como ejercicio adicional y completamente opcional, al terminar de resolver este problema pueden intentar definir funciones que logren los mismos resultados pero de manera iterativa.
 */
 
 function nFactorial(n) {
-  if( n=== 0 || n ===1 ) return 1 
-  return  n* nFactorial(n-1)
+if (n === 0 || n === 1) return 1;
+else {return n*nFactorial(n-1)}
 }
 
-console.log(nFactorial(15));
+console.log(nFactorial(5));
 
 
-function nFibonacci(n) {
+function nFibonacci(n) {//7
   if (n ===0 ) return 0;
     if (n ===1) return 1 ;
+//                  fino 6      fino 5
     return nFibonacci(n-1) + nFibonacci(n-2);
 }
 console.log(nFibonacci(7))
@@ -51,16 +52,17 @@ Pueden utilizar class o función constructora.
 */
 
 function Queue() {
-  this.arra = []
+  this.arra = [];
 }
 console.log(Queue)
 
-Queue.prototype.enqueue= function(valor){ // mete al comienzo
+Queue.prototype.enqueue= function(valor){ // mete al final, como una fila 
   this.arra.push(valor);
 }
 
 Queue.prototype.dequeue = function(){ //saca del comienzo
-  return this.arra.shift();
+  if (this.arra.length < 0) return undefined;
+  if (this.arra.length > 0) return this.arra.shift();
 }
 
 //Queue.prototype.dequeue = function () {
@@ -72,7 +74,7 @@ Queue.prototype.size = function(){
 }
 
 var brunoiontento = new Queue()
-
+console.log(brunoiontento.arra.length)
 console.log(brunoiontento.size());
 
 console.log(brunoiontento)
