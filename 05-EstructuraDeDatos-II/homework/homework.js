@@ -85,7 +85,7 @@ LinkedList.prototype.search = function(value){ //! aca entra el 5, ahora hayq ue
   try{
     while(current.value != value){ //! en la primera busacamos si el rimer data, es el valor
       if(typeof value === 'function'){
-        if(value(current.value)) return current.value
+        if(value(current.value)) return current.value // si lo que me devuelve es true, si esto salio bien, retorna el parametro, en si te dara
       }
       previous = current //! al no suceder esto, tomamos un previus, 
       current = current.next //! y hacemos que current pase al siguiente, hasta que lo encuentr
